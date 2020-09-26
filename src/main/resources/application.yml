@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: local # 기본 환경 선택
+
+---
+# local
+spring:
+  profiles: local
+  h2:
+    console:
+      enabled: true
+  datasource:
+    data: classpath:data-h2.sql #시작 시 실행시킬 script
+    url: jdbc:h2:mem:testdb
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+      use-new-id-generator-mappings: false
