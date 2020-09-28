@@ -34,6 +34,18 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
     bucket: springboot-webservice-deploy-jhchoi # 6-3-3에서 생성한 S3 버킷
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: public_read
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true
+    on:
+      repo: timulys/springboot-webservice #Github 주소
+      branch: master
+  - provider: codedeploy
+    ccess_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: springboot-webservice-deploy-jhchoi # S3 버킷
     key: springboot-webservice.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip
     application: springboot-webservice # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
@@ -41,5 +53,5 @@ deploy:
     region: ap-northeast-2
     wait-until-deployed: true
     on:
-      repo: timulys/springboot-webservice #Github 주소
+      repo: timulys/springboot-webservice
       branch: master
