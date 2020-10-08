@@ -6,8 +6,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
----
 # local
+---
 spring:
   profiles: local
   datasource:
