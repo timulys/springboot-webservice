@@ -1,14 +1,15 @@
 spring:
   profiles:
     active: local # 기본 환경 선택
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
 ---
 # local
 spring:
   profiles: local
-  h2:
-    console:
-      enabled: true
   datasource:
     data: classpath:data-h2.sql #시작 시 실행시킬 script
     url: jdbc:h2:mem:testdb
@@ -17,3 +18,21 @@ spring:
     hibernate:
       ddl-auto: create-drop
       use-new-id-generator-mappings: false
+  h2:
+    console:
+      enabled: true
+
+# 운영환경
+---
+spring.profiles: set1
+spring.profiles.include: real-db
+
+server:
+  port: 8081
+
+---
+spring.profiles: set2
+spring.profiles.include: real-db
+
+server:
+  port: 8082
